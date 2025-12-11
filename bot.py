@@ -25,7 +25,7 @@ sent_titles = set()  # جلوگیری از تکراری‌ها در طول اج�
 # وب‌سرور کوچک برای Render
 # =========================
 
-app = Flask("name")
+app = Flask(__name__)
 
 @app.route("/")
 def home():
@@ -65,9 +65,9 @@ def get_latest_item(url):
 
 
 def send_to_telegram(text):
-    url = f"https://api.telegram.org/bot{8541225332:AAEf2ndNwokYM43Gq5NGl5tX-5aliicTe_4}/sendMessage"
+    url = f"8541225332:AAEf2ndNwokYM43Gq5NGl5tX-5aliicTe_4"
     data = {
-        "chat_id":"@Akhbar_Matni",
+        "chat_id": "@Akhbar_Matni",
         "text": text,
         "parse_mode": "HTML"
     }
@@ -125,12 +125,11 @@ def bot_loop():
         time.sleep(CHECK_EVERY)
 
 
-if name == "main":
+if __name__ == "__main__":
     # یک Thread برای وب‌سرور (برای Render Web Service)
     server_thread = threading.Thread(target=run_server)
     server_thread.daemon = True
     server_thread.start()
 
     # حلقه اصلی ربات
-
     bot_loop()
